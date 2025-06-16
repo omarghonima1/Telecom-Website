@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked to Wallet?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        /* Form container styles */
+        .form-container {
+            margin: 50px auto;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            width: 100%;
+            background-color: #0059b3;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0073e6;
+        }
+
+        /* Result container */
+        .result-container {
+            margin: 30px auto;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-container p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .result-container .result {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Linked to Wallet?
+    </div>
+    <div class="form-container">
+        <label for="mobile-number-input">Enter Mobile Number</label>
+        <input type="text" id="mobile-number-input" placeholder="Enter Mobile Number">
+
+        <button onclick="checkIfLinked()">Check if Linked</button>
+    </div>
+    <div class="result-container" id="result-container" style="display: none;">
+        <p><strong>Mobile Number:</strong> <span id="mobile-result"></span></p>
+        <p class="result" id="link-result"></p>
+    </div>
+
+    <script>
+        function checkIfLinked() {
+            const mobileNumber = document.getElementById('mobile-number-input').value;
+
+            if (!mobileNumber) {
+                alert('Please enter a Mobile Number!');
+                return;
+            }
+
+            // Simulate checking if the mobile number is linked to a wallet
+            const isLinked = Math.random() < 0.5; // 50% chance of being linked, for simulation purposes
+
+            // Display the result
+            document.getElementById('mobile-result').innerText = mobileNumber;
+            const resultText = isLinked ? 'This mobile number is linked to a wallet.' : 'This mobile number is NOT linked to a wallet.';
+            document.getElementById('link-result').innerText = resultText;
+            document.getElementById('result-container').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

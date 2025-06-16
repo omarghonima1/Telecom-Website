@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Earned Points</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        /* Form container styles */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        .form-container label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+            align-self: flex-start;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            width: 100%;
+            background-color: #0059b3;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0073e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Update Earned Points
+    </div>
+    <div class="form-container">
+        <label for="mobile-number">Mobile Number</label>
+        <input type="text" id="mobile-number" placeholder="Enter Mobile Number">
+
+        <label for="points-earned">Points Earned</label>
+        <input type="number" id="points-earned" placeholder="Enter Points Earned">
+
+        <button onclick="updatePoints()">Update Points</button>
+    </div>
+
+    <script>
+        function updatePoints() {
+            const mobileNumber = document.getElementById('mobile-number').value;
+            const pointsEarned = document.getElementById('points-earned').value;
+
+            if (!mobileNumber || !pointsEarned) {
+                alert('Please fill in both fields!');
+                return;
+            }
+
+            alert(`Points updated successfully for Mobile Number: ${mobileNumber} with ${pointsEarned} points.`);
+        }
+    </script>
+</body>
+</html>

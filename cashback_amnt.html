@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashback Amount</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        /* Form container styles */
+        .form-container {
+            margin: 50px auto;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            width: 100%;
+            background-color: #0059b3;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0073e6;
+        }
+
+        /* Result container */
+        .result-container {
+            margin: 30px auto;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-container p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Cashback Amount
+    </div>
+    <div class="form-container">
+        <label for="wallet-id-input">Enter Wallet ID</label>
+        <input type="text" id="wallet-id-input" placeholder="Enter Wallet ID">
+
+        <label for="plan-id-input">Enter Plan ID</label>
+        <input type="text" id="plan-id-input" placeholder="Enter Plan ID">
+
+        <button onclick="fetchCashbackAmount()">View Cashback Amount</button>
+    </div>
+    <div class="result-container" id="result-container" style="display: none;">
+        <p><strong>Wallet ID:</strong> <span id="wallet-result"></span></p>
+        <p><strong>Plan ID:</strong> <span id="plan-result"></span></p>
+        <p><strong>Cashback Amount:</strong> <span id="cashback-amount"></span></p>
+    </div>
+
+    <script>
+        function fetchCashbackAmount() {
+            const walletId = document.getElementById('wallet-id-input').value;
+            const planId = document.getElementById('plan-id-input').value;
+
+            if (!walletId || !planId) {
+                alert('Please enter both Wallet ID and Plan ID!');
+                return;
+            }
+
+            // Simulate fetching data
+            const cashbackAmount = Math.floor(Math.random() * 100); // Example random value
+
+            // Display results
+            document.getElementById('wallet-result').innerText = walletId;
+            document.getElementById('plan-result').innerText = planId;
+            document.getElementById('cashback-amount').innerText = `$${cashbackAmount}`;
+            document.getElementById('result-container').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

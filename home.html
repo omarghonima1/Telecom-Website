@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Account Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin: 0;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        /* Navigation Menu */
+        .menu {
+            width: 200px;
+            background-color: #2980b9;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+            border-radius: 8px;
+        }
+        .menu h2 {
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .menu h2:hover {
+            color: #3498db;
+        }
+        /* Main content area */
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+            display: none;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #2980b9;
+            color: white;
+        }
+        .card {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card p {
+            margin: 5px 0;
+        }
+        /* Dropdown Menu */
+        .submenu {
+            display: none;
+            padding-left: 20px;
+        }
+        /* From Uiverse.io by cssbuttons-io */ 
+button {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+button:active {
+  transform: translateY(-1px);
+}
+            .input {
+ border: none;
+ padding: 1rem;
+ border-radius: 1rem;
+ background: #e8e8e8;
+ box-shadow: 20px 20px 60px #c5c5c5,
+		-20px -20px 60px #ffffff;
+ transition: 0.3s;
+}
+
+.input:focus {
+ outline-color: #e8e8e8;
+ background: #e8e8e8;
+ box-shadow: inset 20px 20px 60px #c5c5c5,
+		inset -20px -20px 60px #ffffff;
+ transition: 0.3s;
+}
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Left Side Menu -->
+        <div class="menu">
+            <h2 onclick="showSection('all-plans-section')">All Service Plans</h2>
+            <h2 onclick="showSection('view-consumption-section')">View Total Consumption</h2>
+            <h2 onclick="showSection('unsubscribed-plans-section')">Show Unsubscribed Plans</h2>
+            <h2 onclick="showSection('active-plan-section')">Show Active Plan</h2>
+            <h2 onclick="showSection('cashback-section')">Show Cashback Transaction</h2>
+            <h2 onclick="showSection('benefits-section')">Active Benefits</h2>
+            <h2 onclick="showSection('tickets-section')">Unresolved Support Tickets</h2>
+            <!-- Financial Details moved to the bottom -->
+            <h2 onclick="showSection('voucher-section')">Highest Value Voucher</h2>
+            <h2 onclick="toggleDropdown()">Financial Details</h2>
+            <div id="financial-details-menu" class="submenu">
+                <h2 onclick="showSection('remaining-amount-section')">Remaining Amount</h2>
+                <h2 onclick="showSection('extra-amount-section')">Extra Amount</h2>
+                <h2 onclick="showSection('payments-section')">Top 10 Payments</h2>
+            </div>
+            <h2 onclick="showSection('shops-details-section')">All Shops</h2>
+            <h2 onclick="showSection('subscribed-plans-5months-section')">Service Plans Subscribed in the Past 5 Months</h2>
+            <h2 onclick="showSection('renew-subscription-section')">Renew Subscription</h2>
+            <h2 onclick="showSection('cashback-amount-section')">Cashback Amount</h2>
+            <h2 onclick="showSection('recharge-balance-section')">Recharge Balance</h2>
+            <h2 onclick="showSection('redeem-voucher-section')">Redeem a Voucher</h2>
+
+
+        </div>
+        <!-- Right Side Content -->
+        <div class="content">
+            <!-- Title: View Consumption for a Plan -->
+            <div id="view-consumption-section" class="section">
+                <h2>View Total Consumption</h2>
+                <div class="card">
+                    <label for="plan-name">Plan Name:</label>
+                    <input type="text" id="plan-name" class="input" placeholder="Type here...">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date">
+                    <button onclick="viewConsumption()">View Consumption</button>
+                    <div id="consumption-details"> </div>
+                </div>
+            </div>
+            <!-- Section for All Service Plans -->
+<div id="all-plans-section" class="section">
+    <h2>All Service Plans</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Plan Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+            
+        </thead>
+        <tbody id="all-plans-table">
+        </tbody>
+    </table>
+</div>
+
+<!-- Section for Unsubscribed Plans -->
+<div id="unsubscribed-plans-section" class="section">
+    <h2>Unsubscribed Plans</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Plan Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="unsubscribed-plans-table">
+        </tbody>
+    </table>
+</div>
+
+<!-- Section for Active Plan -->
+<div id="active-plan-section" class="section">
+    <h2>Active Plan</h2>
+    <div class="card">
+        <p><strong>Plan Name:</strong></p>
+        <p><strong>Status:</strong></p>
+    </div>
+</div>
+
+<!-- Section for Cashback Transaction -->
+<div id="cashback-section" class="section">
+    <h2>Show Cashback Transaction</h2>
+    <div class="card">
+        <label for="national-id">National ID:</label>
+        <input type="text" id="national-id" class="input" placeholder="Type here...">
+        <button onclick="showCashbackTransactions()">Show Cashback</button>
+        <div id="cashback-transactions"></div>
+    </div>
+</div>
+
+            <!-- Section 1: Highest Value Voucher -->
+            <div id="voucher-section" class="section">
+                <h2>Highest Value Voucher</h2>
+                <div class="card">
+                    <p><strong>Voucher Code:</strong></p>
+                    <p><strong>Voucher Value:</strong></p>
+                </div>
+            </div>
+
+            <!-- Section 2: Active Benefits -->
+            <div id="benefits-section" class="section">
+                <h2>Active Benefits</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Benefit Name</th>
+                            <th>Description</th>
+                            <th>Expiration Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="benefits-table">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 3: Unresolved Support Tickets -->
+            <div id="tickets-section" class="section">
+                <h2>Unresolved Support Tickets</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Status</th>
+                            <th>Issue</th>
+                            <th>Open Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tickets-table">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 4: Financial Details -->
+            <div id="remaining-amount-section" class="section">
+                <h2>Remaining Amount for Last Payment</h2>
+                <div class="card">
+                    <p><strong>Plan:</strong></p>
+                    <p><strong>Remaining Amount:</strong></p>
+                </div>
+            </div>
+
+            <div id="extra-amount-section" class="section">
+                <h2>Extra Amount for Last Payment</h2>
+                <div class="card">
+                    <p><strong>Plan:</strong></p>
+                    <p><strong>Extra Amount:</strong></p>
+                </div>
+            </div>
+
+            <div id="payments-section" class="section">
+                <h2>Top 10 Successful Payments</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payments-table">
+                    </tbody>
+                </table>
+            </div>
+                <!-- Section 1: View Details for All Shops -->
+<div id="shops-details-section" class="section">
+    <h2>View Details for All Shops</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Shop ID</th>
+                <th>Shop Name</th>
+                <th>Location</th>
+                <th>Open Hours</th>
+            </tr>
+        </thead>
+        <tbody id="shops-table">
+        </tbody>
+    </table>
+</div>
+
+<!-- Section 2: Show All Service Plans Subscribed in the Past 5 Months -->
+<div id="subscribed-plans-5months-section" class="section">
+    <h2>Service Plans Subscribed in the Past 5 Months</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Plan ID</th>
+                <th>Plan Name</th>
+                <th>Subscription Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="subscribed-plans-5months-table">
+        </tbody>
+    </table>
+</div>
+
+<!-- Section 3: Renew Subscription for a Plan -->
+<div id="renew-subscription-section" class="section">
+    <h2>Renew Subscription for a Plan</h2>
+    <div class="card">
+        <label for="plan-id">Plan ID:</label>
+        <input type="text" id="plan-id" placeholder="Enter Plan ID"class="input" >
+        <label for="mobile-number">Mobile Number:</label>
+        <input type="text" id="mobile-number" placeholder="Enter Mobile Number" class="input">
+        <label for="payment-amount">Payment Amount:</label>
+        <input type="number" id="payment-amount" placeholder="Enter Payment Amount"class="input">
+        <button onclick="renewSubscription()">Renew Subscription</button>
+    </div>
+</div>
+
+<!-- Section 4: Get Cashback Amount for a Payment -->
+<div id="cashback-amount-section" class="section">
+    <h2>Get Cashback Amount for a Payment</h2>
+    <div class="card">
+        <label for="mobile-number-cashback">Mobile Number:</label>
+        <input type="text" id="mobile-number-cashback" placeholder="Enter Mobile Number"class="input">
+        <label for="payment-id">Payment ID:</label>
+        <input type="text" id="payment-id" placeholder="Enter Payment ID"class="input">
+        <label for="benefit-id">Benefit ID:</label>
+        <input type="text" id="benefit-id" placeholder="Enter Benefit ID" class="input">
+        <button onclick="getCashbackAmount()">Get Cashback</button>
+        <div id="cashback-amount"></div>
+    </div>
+</div>
+
+<!-- Section 5: Recharge Balance for a Mobile Number -->
+<div id="recharge-balance-section" class="section">
+    <h2>Recharge Balance for a Mobile Number</h2>
+    <div class="card">
+        <label for="mobile-number-recharge">Mobile Number:</label>
+        <input type="text" id="mobile-number-recharge" placeholder="Enter Mobile Number" class="input">
+        <label for="payment-method">Payment Method:</label>
+        <select id="payment-method">
+            <option value="credit-card">Credit Card</option>
+            <option value="paypal">PayPal</option>
+        </select>
+        <label for="recharge-amount">Recharge Amount:</label>
+        <input type="number" id="recharge-amount" placeholder="Enter Amount" class="input">
+        <button class = "button"onclick="rechargeBalance()">Recharge</button>
+    </div>
+</div>
+
+<!-- Section 6: Redeem a Voucher -->
+<div id="redeem-voucher-section" class="section">
+    <h2>Redeem a Voucher</h2>
+    <div class="card">
+        <label for="voucher-id">Voucher ID:</label>
+        <input type="text" id="voucher-id" placeholder="Enter Voucher ID"class="input">
+        <button onclick="redeemVoucher()">Redeem Voucher</button>
+    </div>
+</div>
+
+        </div>
+    </div>
+
+    <script>
+
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.style.display = 'none');
+    const sectionToShow = document.getElementById(sectionId);
+    sectionToShow.style.display = 'block';
+
+    // Trigger dynamic data fetch based on section ID
+   
+}
+
+
+
+
+
+        // Show the corresponding section when clicking a menu item
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            const sectionToShow = document.getElementById(sectionId);
+            sectionToShow.style.display = 'block';
+        }
+
+        // Toggle the dropdown for Financial Details
+        function toggleDropdown() {
+            const menu = document.getElementById('financial-details-menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // Initially, show Highest Value Voucher
+        showSection('voucher-section');
+        function showSection(sectionId) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        section.style.display = 'none';
+        })};
+
+    // Show the selected section
+    const sectionToShow = document.getElementById(sectionId);
+    sectionToShow.style.display = 'block';
+
+    // Trigger dynamic data fetch based on section ID
+  
+
+    </script>
+
+</body>
+</html>

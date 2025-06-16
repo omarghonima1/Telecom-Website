@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISP Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header .right-buttons button {
+            margin-left: 10px;
+            background-color: #0059b3;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header .right-buttons button:hover {
+            background-color: #0073e6;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #003366;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #0059b3;
+        }
+
+        .sidebar .submenu {
+            display: none;
+            background-color: #002244;
+            margin-left: 20px;
+        }
+
+        .sidebar .submenu a {
+            padding: 10px;
+        }
+
+        .sidebar .submenu a:hover {
+            background-color: #0059b3;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Open sidebar button */
+        .open-btn {
+            font-size: 20px;
+            background-color: #0059b3;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .open-btn:hover {
+            background-color: #0073e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="open-btn" onclick="openSidebar()">☰ Open Sidebar</button>
+        <div class="right-buttons">
+            <button>Logout</button>
+            <button>Login Page</button>
+            <button>Home</button>
+        </div>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+        <a href="#" onclick="toggleSubmenu('customerDetails')">Customer Details</a>
+        <div id="customerDetails" class="submenu">
+            <a href="#">All Profiles</a>
+            <a href="#">Customer Service Plans</a>
+            <a href="#">Show Usage</a>
+            <a href="#">Remove Benefits</a>
+            <a href="#">Show All SMS Offered</a>
+            <a href="#">Update Earned Points</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('customerFinances')">Customer Finances</a>
+        <div id="customerFinances" class="submenu">
+            <a href="#">Physical Stores</a>
+            <a href="#">E-Shops</a>
+            <a href="#">Transaction Details</a>
+            <a href="#">Payments</a>
+            <a href="#">Average Transactions</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('walletsCashback')">Wallets & Cashback</a>
+        <div id="walletsCashback" class="submenu">
+            <a href="#">Wallet Details</a>
+            <a href="#">Cashback Transactions</a>
+            <a href="#">Cashback Amount</a>
+            <a href="#">Account Linked to Wallet</a>
+        </div>
+        <a href="#">Tickets</a>
+    </div>
+
+    <script>
+        function openSidebar() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+
+        function closeSidebar() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            if (submenu.style.display === "block") {
+                submenu.style.display = "none";
+            } else {
+                submenu.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
